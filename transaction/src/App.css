@@ -1,0 +1,629 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  position: relative; 
+  overflow: hidden; 
+  z-index: -1;
+/*  background: url('/public/A_clean_white_background_featuring_a_collection_of_golden_digital_coins_arranged_exclusively_in_the_bottom_corners_of_the_image_The_coins_should_be_grouped_tightly_in_the_lower_left_and_lower_right_corners_with_no.png') no-repeat center center;
+  background-size: cover;*/
+    background: linear-gradient(to bottom, #1e293b, #f1f5f9);
+  }
+  
+
+.coin {
+  position: fixed;
+  width: 35px;
+  height: 35px;
+  background: url('/public/coin.png') no-repeat center center;
+  background-size: cover;
+  animation: spin infinite linear;
+  pointer-events: none;
+  z-index: 0;
+  animation: float-spin 4s infinite ease-in-out;
+
+}
+
+@keyframes float-spin {
+  0% { transform: translateY(0) rotateY(0deg); }
+  50% { transform: translateY(-10px) rotateY(180deg); }
+  100% { transform: translateY(0) rotateY(360deg); }
+}
+
+
+
+.main-container {
+  padding: 60px; /* إضافة بعض الحشو للمحتوى */
+  margin-top: 100px; /* المسافة بين النافبار والكونتينر */
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 500px; 
+  padding: 90px;
+  margin-top: 10px;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 100%;
+  
+ 
+}
+
+.form-container {
+  position: relative;
+  flex: 1;
+  padding: 80px;
+ /* background: url("/public/th (5).jpg") no-repeat center center;
+*/
+background-color: #1e293b;
+color: #f1f5f9;
+  background-size: cover;
+  opacity: 0.8;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh; 
+  overflow-y: auto;
+  box-sizing: border-box;
+  transition: transform 0.3s;
+  z-index: 2;
+}
+
+.form-container::-webkit-scrollbar {
+  display: none; 
+}
+
+.form-container:hover {
+  transform: scale(1.02);
+}
+
+
+.form-container {
+  -ms-overflow-style: none;  
+  scrollbar-width: none; 
+}
+
+
+
+
+.navbar {
+   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 30px;
+  background: #0056b3;
+  color: #fff; 
+  font-weight: bold;
+  transition: background 0.3s, box-shadow 0.3s;
+  position: fixed; 
+  width: 100%; 
+  z-index: 1000; 
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.navbar.scrolled {
+  background: rgba(4, 111, 137, 0.8); /* تغيير اللون عند التمرير */
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5); /* زيادة الظل */
+}
+
+.logo {
+  height: 80px;
+  margin-right: 20px;
+  animation: logoAnimation 2s ease-in-out infinite; /* الحركة المستمرة */
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.2) rotate(10deg); /* تكبير وتدوير عند التحويم */
+  opacity: 0.9; /* تقليل الشفافية */
+}
+
+@keyframes logoAnimation {
+  0% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-10px); /* التحرك للأعلى */
+  }
+  100% {
+      transform: translateY(0); /* العودة إلى الموضع الأصلي */
+  }
+}
+
+
+
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  margin: 0 15px;
+  transition: color 0.3s, transform 0.3s; /* إضافة تأثير التحويل */
+}
+
+.nav-link:hover {
+  color: #ffcc00;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  transform: scale(1.1); /* تكبير عند التحويم */
+}
+
+
+.navbar img {
+  transition: transform 0.3s;
+}
+
+.navbar img:hover {
+  transform: scale(1.1);
+}
+.nav-links {
+  display: flex; /* الحفاظ على العرض الأفقي في الشاشات الكبيرة */
+  align-items: center; /* محاذاة العناصر في المنتصف */
+}
+
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .nav-links {
+    flex-direction: column; /* تغيير الاتجاه إلى عمودي عند تصغير الشاشة */
+    width: 100%; /* جعل الروابط تأخذ عرض كامل */
+    align-items: flex-start; /* محاذاة العناصر إلى اليسار */
+}
+  .nav-link {
+      margin: 5px 0;
+      width: 100%;
+      text-align: center;
+  }
+
+
+  .logo {
+      margin-bottom: 10px;
+  }
+
+  .form-container {
+      width: 90%;
+      padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    height: 60px;
+  }
+
+  body {
+    font-size: 0.875rem; 
+  }
+
+  .form-container {
+    padding: 1.5rem; 
+  }
+
+  .input-group label {
+    font-size: 1em;
+  }
+
+  input, select {
+    padding: 12px;
+    font-size: 0.9em;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 1em;
+  }
+
+  .get-started-button {
+    padding: 10px 15px;
+    font-size: 1em;
+  }
+
+  p {
+    font-size: 1.2em;
+  }
+
+  h1 {
+    font-size: 2.5rem; 
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.8em;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    height: 50px;
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  .form-container {
+    padding: 1.5rem; 
+  }
+
+  .input-group label {
+    font-size: 0.9em;
+  }
+
+  input, select {
+    padding: 10px;
+    font-size: 0.8em;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  .get-started-button {
+    padding: 8px 12px;
+    font-size: 0.9em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  h3 {
+    font-size: 1.6em;
+  }
+}
+
+/* Headings */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  color: #fcd34d;
+  background-color: rgba(30, 41, 59, 0.6);
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+  display: inline-block;
+}
+h4 {
+  font-size: 3rem; 
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  color: #fcd34d;
+  
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: rgba(30, 41, 59, 0.6);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+  display: inline-block;
+}
+h1 {
+  font-size: 3rem; 
+  margin: 0;
+}
+
+h2 {
+  font-size: 2.5rem; 
+}
+
+h3 {
+  font-size: 2rem; 
+}
+h5{
+  color: rgb(248, 247, 247);
+  text-shadow: 1px 1px 2px rgba(249, 241, 241, 0.7);
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column; /* تغيير إلى عمودي */
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: black;
+  text-shadow: 1px 1px 2px rgba(5, 1, 1, 0.7);
+  font-size: 1.2em;
+}
+
+input,
+select {
+  padding: 1rem; 
+  border: 1px solid rgb(241, 198, 41);
+  border-radius: 0.5rem; 
+  font-size: 1rem; 
+  width: 100%; /* جعل المدخلات تأخذ العرض الكامل */
+}
+
+/* Button Styles */
+button {
+  width: 100%;
+  padding: 1rem; 
+  background: linear-gradient(90deg, #f59e0b, #facc15);
+  color: black;
+  text-shadow: 1px 1px 2px rgba(5, 1, 1, 0.7);
+  border: none;
+  border-radius: 0.5rem; 
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem; 
+}
+button:hover {
+  background: linear-gradient(90deg, #facc15, #f59e0b);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+  transform: scale(1.05);
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button-group button {
+  margin-left: 10px;
+}
+
+/* Register Link */
+.register-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* Links */
+a {
+  color: rgb(241, 198, 41);
+  text-shadow: 1px 1px 2px hwb(40 1% 19% / 0.916);
+}
+
+/* Operations Container */
+.operations-container {
+  background: rgba(4, 111, 137, 0.9);
+  border-radius: 10px;
+  padding: 30px;
+  margin: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: rgb(9, 0, 0);
+  text-shadow: 1px 1px 2px rgba(5, 1, 1, 0.7);
+}
+
+.operations-list {
+  list-style-type: none;
+  padding: 0;
+}
+.main-container {
+   /* يمكنك ضبط القيمة حسب ارتفاع النافبار */
+  padding: 60px; /* إضافة بعض الحشو للمحتوى */
+}
+.operation-link {
+  display: block;
+  margin: 15px 0;
+  padding: 15px;
+  background: rgb(241, 198, 41);
+  color: rgba(0, 0, 0, 0.883);
+  text-shadow: 1px 1px 2px rgba(5, 1, 1, 0.7);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.operation-link:hover {
+  background: linear-gradient(90deg, #f59e0b, #facc15);
+  color: black;
+}
+
+
+.welcome-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 1px 1px 4px black;
+  width: 100%;
+  padding:1%;
+  z-index: 1;
+  
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  width: 100%; 
+  max-width: 600px; 
+  height: 100%;
+  max-height: 400px; 
+ /* background: url("/public/th (5).jpg") no-repeat center center; */
+ background-color: #1e293b;
+ color: #f1f5f9;
+  background-size: cover;
+  opacity: 0.8; 
+  padding: 70px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  
+}
+
+/* إضافة تأثير عند التحويم */
+.welcome-content:hover {
+  opacity: 1; /* زيادة الشفافية عند التحويم */
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 70px;
+  font-size: 40px;
+  color: #f1f5f9;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  margin-bottom: 2.5rem;
+}
+/* CSS لكتابة النص */
+
+
+.falling-word {
+  display: inline-flex;
+  opacity: 0;
+  animation: slide-in 0.5s forwards cubic-bezier(0.6, 0.04, 0.98, 0.34); /* تعديل الاسم إلى slide-in */
+  animation-delay: var(--delay);
+  margin-right: 10px;
+}
+
+@keyframes slide-in {
+  from {
+      transform: translateX(-20px); /* بداية الحركة من اليسار */
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
+
+
+/* Adjustment to place the container below the welcome message */
+.container-below-message {
+  margin-top: 2.5rem;
+}
+
+/* Paragraph Styles */
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4em;
+  margin: 15px 0 0;
+  color: #f1f5f9;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Get Started Button */
+.get-started-button {
+  background: linear-gradient(90deg, #f59e0b, #facc15);
+  color: black;
+  border: none;
+  padding: 15px 20px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.get-started-button:hover {
+  background: linear-gradient(90deg, #facc15, #f59e0b);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+  transform: scale(1.05);
+}
+.input-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #007bff; /* لون الأيقونة */
+}
+.spinner {
+  animation: spin 1s infinite linear;
+  font-size: 24px; /* يمكنك تغيير الحجم حسب الحاجة */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Error Handling */
+.error {
+  border: 2px solid red;
+}
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+  font-size: 1em;
+}
+.operations-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column; /* ترتيب العناصر عمودياً */
+  gap: 10px; /* المسافة بين الأزرار */
+}
+
+.operation-button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(90deg, #f59e0b, #facc15);
+  color: black;
+  text-shadow: 1px 1px 2px rgba(5, 1, 1, 0.7);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: background 0.3s, transform 0.3s; /* إضافة تأثير التحويل */
+}
+
+.operation-button:hover {
+  background: linear-gradient(90deg, #facc15, #f59e0b);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+  transform: scale(1.05);
+}
+
+.spinner {
+  margin-right: 8px; /* مساحة بين الأيقونة والنص */
+  animation: spin 1s infinite linear;
+  font-size: 24px; /* يمكنك تغيير الحجم حسب الحاجة */
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.background-character {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -2;
+}
+
+
+.character {
+  width: 14%; /* تصغير بنسبة تقريبا 30% */
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 0;
+  pointer-events: none;
+}
+
