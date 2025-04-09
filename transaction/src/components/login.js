@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // استيراد Link
 import { FaSpinner } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import '../App.css';
@@ -20,7 +20,6 @@ const Login = () => {
                 .required('Required'),
         }),
         onSubmit: (values, { setSubmitting }) => {
-            
             setTimeout(() => {
                 setSubmitting(false);
                 navigate('/Operations');
@@ -80,7 +79,7 @@ const Login = () => {
                     </button>
                 </form>
                 <div className="register-link">
-                    <p>If you don't have an account, <a className='a' href="/register">register here</a></p>
+                    <p>If you don't have an account, <Link className='a' to="/register">register here</Link></p>
                 </div>
             </div>
         </motion.div>

@@ -1,79 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AppContext } from './AppContext';  // استيراد السياق
 import '../App.css';
 
 const WalletTransfer = () => {
+    const { wallet, updateWallet } = useContext(AppContext);  // الوصول إلى المحفظة من السياق
     const [amount, setAmount] = useState('');
-    const [fromCurrency, setFromCurrency] = useState('CNY');
-    const [toCurrency, setToCurrency] = useState('USD');
-    const [exchangeRates] = useState({ 
-        CNY: 6.5,
-        SYP: 2000,
-        USD: 1.0,
-        EUR: 0.85,
-        GBP: 0.75,
-    });
+    const [fromWallet, setFromWallet] = useState('Wallet1');
+    const [toWallet, setToWallet] = useState('Wallet2');
     const [calculatedAmount, setCalculatedAmount] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
-        const fromRate = exchangeRates[fromCurrency];
-        const toRate = exchangeRates[toCurrency];
-        const resultAmount = (amount * fromRate / toRate).toFixed(2);
-        setCalculatedAmount(resultAmount);
-        alert(`You will receive ${resultAmount} ${toCurrency}`);
+
+        // تحقق من وجود رصيد كافٍ في المحفظة المصدر
+        const fromBalance = wallet[fromWallet];
+        if (parseFloat(amount) > fromBalance) {
+            alert(`Insufficient balance in ${fromWallet}`);
+            return;
+        }
+
+        // خصم المبلغ من المحفظة المصدر وإضافته إلى المحفظة الهدف
+        updateWallet(-parseFloat(amount), fromWallet);  // خصم من المحفظة المصدر
+        updateWallet(parseFloat(amount), toWallet);  // إضافة إلى المحفظة الهدف
+
+        setCalculatedAmount(amount);
+        alert(`Transferred ${amount} from ${fromWallet} to ${toWallet}`);
     };
 
     return (
         <div className="container">
             <div className="form-container">
-            <h2>Wallet Transfer</h2>
-            <p>Transfer funds between different wallets.</p>
-            <form onSubmit={handleSubmit}>
-                <div className="input-group">
-                    <label>Amount to Transfer:</label>
-                    <input 
-                        type="number" 
-                        placeholder="Enter amount" 
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)} 
-                        required 
-                    />
-                </div>
-                
-                <div className="input-group">
-                    <label>From Currency:</label>
-                    <select 
-                        value={fromCurrency} 
-                        onChange={(e) => setFromCurrency(e.target.value)} 
-                        required
-                    >
-                        {Object.keys(exchangeRates).map((currencyKey) => (
-                            <option key={currencyKey} value={currencyKey}>
-                                {currencyKey}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                <h2>Wallet Transfer</h2>
+                <p>Transfer funds between different wallets.</p>
+                <form onSubmit={handleSubmit}>
+                    <div className="input-group">
+                        <label>Amount to Transfer:</label>
+                        <input 
+                            type="number" 
+                            placeholder="Enter amount" 
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    
+                    <div className="input-group">
+                        <label>From Wallet:</label>
+                        <select 
+                            value={fromWallet} 
+                            onChange={(e) => setFromWallet(e.target.value)} 
+                            required
+                        >
+                            <option value="Wallet1">Wallet 1</option>
+                            <option value="Wallet2">Wallet 2</option>
+                            <option value="Wallet3">Wallet 3</option>
+                        </select>
+                    </div>
 
-                <div className="input-group">
-                    <label>To Currency:</label>
-                    <select 
-                        value={toCurrency} 
-                        onChange={(e) => setToCurrency(e.target.value)} 
-                        required
-                    >
-                        {Object.keys(exchangeRates).map((currencyKey) => (
-                            <option key={currencyKey} value={currencyKey}>
-                                {currencyKey}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                    <div className="input-group">
+                        <label>To Wallet:</label>
+                        <select 
+                            value={toWallet} 
+                            onChange={(e) => setToWallet(e.target.value)} 
+                            required
+                        >
+                            <option value="Wallet1">Wallet 1</option>
+                            <option value="Wallet2">Wallet 2</option>
+                            <option value="Wallet3">Wallet 3</option>
+                        </select>
+                    </div>
 
-                <h5>Estimated Amount: {calculatedAmount} {toCurrency}</h5>
-                <button type="submit">Transfer</button>
-            </form>
+                    <h5>Estimated Amount: {calculatedAmount} (to be transferred)</h5>
+                    <button type="submit">Transfer</button>
+                </form>
             </div>
         </div>
     );

@@ -9,6 +9,7 @@ const Operations = () => {
         walletTransfer: false,
         withdraw: false,
         deposit: false,
+        WalletManagement: false,
     });
     const navigate = useNavigate();
 
@@ -25,6 +26,11 @@ const Operations = () => {
             <div className="form-container">
                 <h2>Operations</h2>
                 <ul className="operations-list">
+                <li>
+                        <button className="operation-button" onClick={() => handleLoading('WalletManagement', '/WalletManagement')} disabled={loading.walletTransfer}>
+                            {loading.WalletManagement ? <FaSpinner className="spinner" /> : 'WalletManagement'}
+                        </button>
+                    </li>
                     <li>
                         <button className="operation-button" onClick={() => handleLoading('transfer', '/FundsTransfer')} disabled={loading.transfer}>
                             {loading.transfer ? <FaSpinner className="spinner" /> : 'Transfer Funds'}
